@@ -18,11 +18,13 @@ const NavBar = () => {
                 ))}
             </ul>
             <div className="flex-center gap-3">
-                <button>
-                    <img src="/search.svg" alt="Search"/>
+                <button className="bg-transparent border-none outline-none cursor-pointer">
+                    <img className="cursor-pointer hover:-translate-y-0.5 transition-all duration-300 ease-in-out"
+                    src="/search.svg" alt="Search"/>
                 </button>
-                <button>
-                    <img src="/cart.svg" alt="Cart"/>
+                <button className="bg-transparent border-none outline-none cursor-pointer">
+                    <img className="cursor-pointer hover:-translate-y-0.5 transition-all duration-300 ease-in-out"
+                    src="/cart.svg" alt="Cart"/>
                 </button>
             </div>
         </nav>
