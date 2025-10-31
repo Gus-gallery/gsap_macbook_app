@@ -2,12 +2,16 @@ import React from 'react'
 import useMacbookStore from '../store'
 import clsx from 'clsx';
 import { Canvas } from '@react-three/fiber';
-import { Box, OrbitControls } from '@react-three/drei';
 import MacbookModel14 from './models/Macbook-14';
-import StudioLights from './StudioLights';
+
+import StudioLights from './three/StudioLights';
+import ModelSwitcher from './three/ModelSwitcher';
+import { useMediaQuery } from 'react-responsive';
 
 const ProductViewer = () => {
     const { color, scale, setColor, setScale } = useMacbookStore();
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1024px)'});
 
   return (
     <section className="container relative min-h-[93vh] mx-auto px-5 2xl:px-0 mt-40">
@@ -21,7 +25,7 @@ const ProductViewer = () => {
                 <div className="flex-between bg-neutral-800 rounded-full px-6 py-3 gap-4">
                     <div 
                         onClick={() => setColor('#adb5bd')} 
-                        className={clsx('size-7 rounded-full cursor-pointer bg-neutral-300', color === '#abd5bd' && 'ring-3 size-3 ring-light-100')}
+                        className={clsx('size-7 rounded-full cursor-pointer bg-neutral-300', color === '#adb5bd' && 'ring-3 size-3 ring-light-100')}
                     />
                     <div 
                         onClick={() => setColor('#2e2c2e')} 
@@ -46,12 +50,10 @@ const ProductViewer = () => {
             </div>
         </div>
 
-        <Canvas className="w-full! h-[80vh]! lg:h-dvh! relative z-40" camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100}}>
+        <Canvas id="canvas" className="w-full! h-[80vh]! lg:h-dvh! relative z-40" camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100}}>
             <StudioLights />
             
-            <MacbookModel14 scale={0.06} position={[0, 0, 0]} />
-
-            <OrbitControls enableZoom={false} />
+            <ModelSwitcher scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile}/>
         
         </Canvas>
     </section>
