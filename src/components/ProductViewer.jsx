@@ -19,7 +19,7 @@ const ProductViewer = () => {
 
         <div className="absolute z-50 bottom-40 lg:bottom-40 2xl:bottom-52 left-1/2 -translate-x-1/2">
             <p className="text-xs text-white bg-black/20 px-2 py-1 rounded-lg">
-            Macbook Pro {scale} in {color}</p>
+            Macbook Pro | available in 14" & 16" in Silver & Space Gray</p>
 
             <div className="flex-center gap-5 mt-5">
                 <div className="flex-between bg-neutral-800 rounded-full px-6 py-3 gap-4">
