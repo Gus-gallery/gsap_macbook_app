@@ -1,27 +1,53 @@
 import { useGSAP } from '@gsap/react';
-import React from 'react'
+import gsap from 'gsap';
 import { useMediaQuery } from 'react-responsive'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
+
+gsap.registerPlugin(ScrollTrigger) 
 
 const Showcase = () => {
     const isTablet = useMediaQuery({ query: '(max-width: 1024px)'});
+    const showcaseRef = useRef();
+    const maskRef = useRef();
+    const contentRef = useRef();
+
 
     useGSAP(() => {
         if(!isTablet) {
-            
+            const timeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: showcaseRef.current,
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true,
+                    pin: true,
+                }
+            });
+
+            timeline.to(maskRef.current, {
+                transform: 'scale(1.1)'
+                });
+            timeline.to(contentRef.current, { 
+                opacity: 1, y: 0, ease: 'power1.in' });
         }
-    })
+    }, [isTablet])
 
   return (
-    <section className="relative">
+    <section ref={showcaseRef} id="showcase" className="relative min-h-screen">
         <div className="relative lg:overflow-hidden">
             <video src="/videos/game.mp4" className="w-full object-cover object-center" loop muted autoPlay playsInline/>
             <div className="absolute h-full top-0 lg:-top-20 xl:top-0">
-                <img src="/mask-logo.svg" className="h-full scale-150 lg:scale-120" />
+                <img ref={maskRef} src="/mask-logo.svg" className="h-full scale-150 lg:scale-100" style={{
+                    transform: isTablet
+                    ? 'matrix(1, 0, 0, 1, 0, 0)'
+                    : 'matrix(80, 0, 0, 80, 0, 0)',
+                }}/>
             </div>
         
         </div>
 
-        <div className="relative z-10 my-5 lg:-mt-40 bg-black font-semibold text-xl text-dark-100">
+        <div ref={contentRef} className="relative z-10 my-5 lg:-mt-40 bg-black font-semibold text-xl text-dark-100 lg:opacity-0">
             <div className="container mx-auto px-5 pb-20 2xl:px-0 flex flex-col lg:flex-row justify-center gap-20"> 
                 <div className="lg:max-w-md">
                     <h2 className="font-semibold text-3xl lg:text-7xl text-white">Rocket Chip</h2>
