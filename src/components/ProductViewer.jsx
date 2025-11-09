@@ -18,7 +18,7 @@ const ProductViewer = () => {
         <h2 className="text-white font-semibold text-3xl lg:text-6xl">Take a closer look.</h2>
 
         <div className="absolute z-50 bottom-40 lg:bottom-40 2xl:bottom-52 left-1/2 -translate-x-1/2">
-            <p className="text-xs text-white bg-black/20 px-2 py-1 rounded-lg">
+            <p className="opacity-70 text-xs text-white bg-black/20 px-2 py-1 rounded-lg">
             Macbook Pro | available in 14" & 16" in Silver & Space Gray</p>
 
             <div className="flex-center gap-5 mt-5">

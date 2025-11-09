@@ -20,7 +20,7 @@ const Hero = () => {
           Buy
         </button>
 
-        <p className="text-white font-thin">From $1599</p>
+        <p className="text-white opacity-70 font-thin">From $1599</p>
     </section>
   )
 }
